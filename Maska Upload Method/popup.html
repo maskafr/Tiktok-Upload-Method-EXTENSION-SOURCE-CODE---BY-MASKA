@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiktok Upload Method - MASKA</title>
+    <style>
+        :root {
+            --bg-a: #090e1f;
+            --bg-b: #130f2e;
+            --bg-c: #0a3f89;
+            --panel: rgba(10, 14, 32, 0.72);
+            --panel-2: rgba(8, 17, 44, 0.72);
+            --line: rgba(173, 224, 255, 0.26);
+            --line-soft: rgba(173, 224, 255, 0.14);
+            --text: #f6fbff;
+            --muted: #9cb3cf;
+            --accent: #4ad8ff;
+            --accent-2: #6a7dff;
+            --ok: #1dffb2;
+            --off: #6f7f98;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+        }
+
+        body {
+            width: 350px;
+            height: 470px;
+            display: grid;
+            place-items: center;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 8% 12%, rgba(108, 83, 255, 0.4) 0, transparent 38%),
+                radial-gradient(circle at 92% 18%, rgba(0, 209, 255, 0.38) 0, transparent 42%),
+                radial-gradient(circle at 90% 90%, rgba(103, 140, 255, 0.35) 0, transparent 45%),
+                linear-gradient(155deg, var(--bg-a), var(--bg-b) 44%, var(--bg-c));
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            mask-image: radial-gradient(circle at center, black 32%, transparent 88%);
+        }
+
+        .panel {
+            width: 92%;
+            height: 93%;
+            border-radius: 26px;
+            background: linear-gradient(170deg, var(--panel), var(--panel-2));
+            border: 1px solid var(--line);
+            backdrop-filter: blur(14px);
+            box-shadow:
+                0 22px 60px rgba(0, 0, 0, 0.48),
+                inset 0 0 20px rgba(70, 190, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            padding: 16px;
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--off);
+            box-shadow: 0 0 0 0 rgba(111, 127, 152, 0.5);
+            animation: pulseOff 2.2s infinite;
+        }
+
+        @keyframes pulseOff {
+            0% { box-shadow: 0 0 0 0 rgba(111, 127, 152, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(111, 127, 152, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(111, 127, 152, 0); }
+        }
+
+        .topline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--line-soft);
+            border-radius: 14px;
+            padding: 8px 10px;
+            background: rgba(9, 17, 40, 0.55);
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .brand {
+            display: grid;
+            gap: 10px;
+            justify-items: center;
+            text-align: center;
+            padding-top: 2px;
+        }
+
+        .logo-wrap {
+            width: 82px;
+            height: 82px;
+            border-radius: 22px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(167, 228, 255, 0.38);
+            box-shadow:
+                0 12px 22px rgba(0, 0, 0, 0.35),
+                0 0 24px rgba(73, 210, 255, 0.18);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+        }
+
+        h1 {
+            font-size: 23px;
+            letter-spacing: 1.6px;
+            font-weight: 800;
+            text-shadow: 0 4px 22px rgba(74, 216, 255, 0.28);
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2.8px;
+        }
+
+        .center-box {
+            border: 1px solid var(--line-soft);
+            border-radius: 18px;
+            padding: 15px 12px 14px;
+            background:
+                linear-gradient(135deg, rgba(76, 146, 255, 0.15), rgba(68, 219, 255, 0.08)),
+                rgba(9, 16, 38, 0.66);
+            display: grid;
+            gap: 12px;
+        }
+
+        .chip-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            border: 1px solid rgba(165, 223, 255, 0.24);
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 10px;
+            color: #c6e7ff;
+            letter-spacing: 0.8px;
+            background: rgba(8, 23, 57, 0.58);
+        }
+
+        .toggle-row {
+            display: grid;
+            justify-items: center;
+            gap: 10px;
+            padding-top: 4px;
+        }
+
+        .switch {
+            position: relative;
+            width: 90px;
+            height: 48px;
+            display: inline-block;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            cursor: pointer;
+            transition: all .25s ease;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            left: 4px;
+            top: 4px;
+            border-radius: 50%;
+            background: #98aec8;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.36);
+            transition: all .25s ease;
+        }
+
+        .switch input:checked + .slider {
+            background: linear-gradient(90deg, rgba(74, 216, 255, 0.22), rgba(106, 125, 255, 0.3));
+            border-color: rgba(114, 224, 255, 0.88);
+            box-shadow: 0 0 24px rgba(74, 216, 255, 0.34);
+        }
+
+        .switch input:checked + .slider::before {
+            transform: translateX(42px);
+            background: var(--accent);
+            box-shadow: 0 0 18px rgba(74, 216, 255, 1);
+        }
+
+        .status-text {
+            font-size: 13px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--off);
+            transition: .2s ease;
+        }
+
+        .status-text.active {
+            color: var(--ok);
+            text-shadow: 0 0 14px rgba(29, 255, 178, 0.8);
+        }
+
+        .cta-wrap {
+            border-top: 1px solid var(--line-soft);
+            padding-top: 12px;
+        }
+
+        .tt-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            width: 100%;
+            text-decoration: none;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            background: linear-gradient(120deg, #141022, #071532 42%, #0d2d66);
+            color: #f6fbff;
+            padding: 11px 12px;
+            font-size: 12px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.26);
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+
+        .tt-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 24px rgba(0, 0, 0, 0.34), 0 0 22px rgba(73, 212, 255, 0.22);
+            border-color: rgba(139, 226, 255, 0.8);
+        }
+
+        .tt-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <main class="panel">
+        <div class="topline">
+            <span>Maska Quality Method</span>
+            <span class="status-dot" aria-hidden="true"></span>
+        </div>
+
+        <section class="brand">
+            <div class="logo-wrap">
+                <img src="icons/icon128.svg" alt="Maska icon" class="logo">
+            </div>
+            <h1>--Tiktok Upload--</h1>
+            <p class="sub">Made by Maska</p>
+        </section>
+
+        <section class="center-box">
+            <div class="chip-row">
+                <span class="chip">Quality Unlock</span>
+                <span class="chip">Compression Guard</span>
+            </div>
+            <div class="toggle-row">
+                <label class="switch">
+                    <input type="checkbox" id="masterSwitch">
+                    <span class="slider"></span>
+                </label>
+                <div class="status-text" id="masterLabel">DISABLED</div>
+            </div>
+        </section>
+
+        <div class="cta-wrap">
+            <a class="tt-btn" href="https://www.tiktok.com/@maskafr" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.12-3.44-3.17-3.8-5.46-.4-2.51.33-5.13 2.02-6.93 1.33-1.45 3.23-2.31 5.21-2.42h.43c.02.02.02.04.02.06v4.05c-.06.01-.12.01-.18.02-1.47.05-2.87.89-3.59 2.18-.74 1.29-.68 3.02.13 4.25.75 1.17 2.16 1.83 3.55 1.7 1.4-.08 2.64-.98 3.19-2.25.29-.65.41-1.37.42-2.08.01-4.71.01-9.42.01-14.13h-.02z"/>
+                </svg>
+                Follow @maskafr
+            </a>
+        </div>
+    </main>
+    <script src="popup.js"></script>
+</body>
+</html>
